@@ -1,3 +1,4 @@
+// @ts-nocheck
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -34,32 +35,34 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import * as web3 from './solana';
 console.log("Inside typescript");
 var connection;
 var RPC_URL = 'https://api.devnet.solana.com';
-export function getRpcUrl() {
+function getRpcUrl() {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             return [2 /*return*/, RPC_URL];
         });
     });
 }
-export function establishConnection() {
+function establishConnection() {
     return __awaiter(this, void 0, void 0, function () {
-        var rpcUrl, version;
+        var rpcUrl, version, el;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, getRpcUrl()];
                 case 1:
                     rpcUrl = _a.sent();
-                    connection = new web3.Connection(rpcUrl, 'confirmed');
+                    connection = new solanaWeb3.Connection(rpcUrl, 'confirmed');
                     return [4 /*yield*/, connection.getVersion()];
                 case 2:
                     version = _a.sent();
                     console.log('Connection to cluster established:', rpcUrl, version);
+                    el = document.getElementById('output');
+                    el.innerHTML = version['solana-core'];
                     return [2 /*return*/];
             }
         });
     });
 }
+establishConnection();
